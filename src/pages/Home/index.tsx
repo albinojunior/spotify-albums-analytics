@@ -7,9 +7,7 @@ import FilterSection from '../../components/FilterSection';
 import AlbumsPanelSection from '../../components/AlbumsPanelSection';
 import TracksSection from '../../components/TracksSection';
 
-interface StateProps {}
-
-class Home extends Component<StateProps> {
+class Home extends Component {
   render() {
     return (
       <div className="container">

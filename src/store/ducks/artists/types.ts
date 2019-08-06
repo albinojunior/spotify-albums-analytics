@@ -14,19 +14,6 @@ export enum ArtistsTypes {
 export interface Artist {
   id: string;
   name: string;
-  href: string;
-  type: 'artist';
-  external_urls?: {
-    spotify: string;
-  };
-  followers?: {
-    href: string;
-    total: number;
-  };
-  genres?: string[];
-  images?: { height: number; url: string; width: number }[];
-  popularity?: number;
-  uri?: string;
 }
 
 /**

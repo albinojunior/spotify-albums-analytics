@@ -14,23 +14,9 @@ export enum AlbumsTypes {
 export interface Album {
   id: string;
   name: string;
-  href: string;
-  type: 'album';
-  external_urls?: {
-    spotify: string;
-  };
-  images?: { height: number; url: string; width: number }[];
-  popularity?: number;
-  uri?: string;
-  album_group?: 'appears_on' | 'single';
-  album_type?: string;
-  artists?: Artist[];
-  available_markets?: string[];
   release_date?: string;
   release_date_precision?: string;
   total_tracks?: number;
-  copyrights?: { text: string; type: string }[];
-  external_ids?: { upc: string };
 }
 
 /**

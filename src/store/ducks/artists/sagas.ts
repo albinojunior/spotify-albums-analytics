@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { ArtistsTypes as types } from './types';
+import { ArtistsTypes as types, Artist } from './types';
 import api from '../../../services/api';
 
+import { loadAlbums } from './../albums/actions';
 import { loadSuccess, loadFailure } from './actions';
 
 export const artistIds: string[] = [
@@ -15,9 +16,9 @@ export const artistIds: string[] = [
 export function* load() {
   try {
     const response = yield call(api.get, `/artists?ids=${artistIds.join('%2C')}`);
-
-    yield put(loadSuccess(response.data.artists));
+    yield put(loadSuccess(response.data.artists.map(({name, id}: Artist) => ({name, id}))));
   } catch (err) {
+    console.log(err);
     yield put(loadFailure());
   }
 }

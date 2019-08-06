@@ -3,40 +3,26 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { ApplicationState } from '../../store';
 
-import { loadArtists } from '../../store/ducks/artists/actions';
-import { loadAlbums } from '../../store/ducks/albums/actions';
-import { Artist } from '../../store/ducks/artists/types';
+import FilterSection from '../../components/FilterSection';
+import AlbumsPanelSection from '../../components/AlbumsPanelSection';
+import TracksSection from '../../components/TracksSection';
 
-interface StateProps {
-  artists: Artist[];
-}
+interface StateProps {}
 
-interface DispatchProps {
-  loadArtists(): void;
-  loadAlbums(artists: Artist[]): void;
-}
-
-type Props = StateProps & DispatchProps;
-class Home extends Component<Props> {
-  componentDidMount() {
-    const { loadArtists } = this.props;
-    loadArtists();
-  }
-
-  componentDidUpdate() {
-    const { loadAlbums, artists } = this.props;
-    loadAlbums(artists);
-  }
-
+class Home extends Component<StateProps> {
   render() {
-    return <></>;
+    return (
+      <div className="container">
+        <FilterSection />
+        <AlbumsPanelSection />
+        <TracksSection />
+      </div>
+    );
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({
-  artists: state.artists.data,
-});
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({ loadArtists, loadAlbums }, dispatch);
+const mapStateToProps = (state: ApplicationState) => ({});
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(
   mapStateToProps,

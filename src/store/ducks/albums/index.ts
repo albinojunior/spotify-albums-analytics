@@ -8,6 +8,7 @@ const INITIAL_STATE: AlbumsState = {
 };
 
 const reducer: Reducer<AlbumsState> = (state = INITIAL_STATE, action) => {
+  console.log(action);
   switch (action.type) {
     case types.LOAD_REQUEST:
       return { ...state, loading: true };

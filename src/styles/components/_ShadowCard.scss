@@ -1,0 +1,18 @@
+.shadow-card {
+    width: 100%;
+    padding: 15px 40px;
+    margin: 15px 0;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 20px $medium-grey;
+    -moz-box-shadow: 0 5px 20px $medium-grey;
+    box-shadow: 0 5px 20px $medium-grey;
+    background: white;
+
+    .title {
+        width: 100%;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 900;
+    }
+    
+}

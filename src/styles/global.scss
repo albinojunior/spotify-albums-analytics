@@ -1,0 +1,17 @@
+@import "colors";
+@import "fonts";
+@import "components";
+
+body,
+html {
+  color: $light-black;
+  margin: 0;
+  font-family: "Circular", Helvetica, Arial, sans-serif;
+  background: $light-grey;
+}
+
+.container {
+  padding: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}

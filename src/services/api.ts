@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getAuthorizationToken } from './auth';
+import { getAuthorizationToken, requestAcessToken } from './auth';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -26,7 +26,7 @@ api.interceptors.response.use(
     const status = error.response ? error.response.status : null;
 
     if (status === 401) {
-      const Authorization = await getAuthorizationToken();
+      const Authorization = await requestAcessToken();
       error.config.headers = { ...error.config.headers, Authorization };
       return api.request(error.config);
     }

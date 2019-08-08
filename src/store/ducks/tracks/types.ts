@@ -5,16 +5,14 @@ import { Album } from '../albums/types';
 export enum TracksTypes {
   LOAD_REQUEST = '@tracks/LOAD_REQUEST',
   LOAD_SUCCCESS = '@tracks/LOAD_SUCCCESS',
-  LOAD_FAILURE = '@tracks/LOAD_FAILURE',
-  LOAD_TOP_TRACKS_REQUEST = '@tracks/LOAD_TOP_TRACKS_REQUEST',
-  LOAD_TOP_TRACKS_SUCCCESS = '@tracks/LOAD_TOP_TRACKS_SUCCCESS',
-  LOAD_TOP_TRACKS_FAILURE = '@tracks/LOAD_TOP_TRACKS_FAILURE',
+  LOAD_FAILURE = '@tracks/LOAD_FAILURE'
 }
 
 /**
  * Data types
  */
 export interface Track {
+  id: string;
   name: string;
   disc_number: number;
   explicit: boolean;
@@ -29,7 +27,6 @@ export interface Track {
  */
 export interface TracksState {
   readonly data: Track[];
-  readonly toptracks: Track[];
   readonly loading: boolean;
   readonly error: boolean;
 }

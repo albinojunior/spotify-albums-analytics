@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
-import { ApplicationState } from '../../store';
+import { Helmet } from "react-helmet"
 
-import FilterSection from '../../components/FilterSection';
-import AlbumsPanelSection from '../../components/AlbumsPanelSection';
-import TracksSection from '../../components/TracksSection';
+import FilterSection from "../../components/FilterSection";
+import AlbumsPanelSection from "../../components/AlbumsPanelSection";
+import TracksSection from "../../components/TracksSection";
 
 class Home extends Component {
   render() {
     return (
       <div className="container">
+        <Helmet>
+          <title />
+        </Helmet>
         <FilterSection />
         <AlbumsPanelSection />
         <TracksSection />
@@ -18,11 +19,4 @@ class Home extends Component {
     );
   }
 }
-
-const mapStateToProps = (state: ApplicationState) => ({});
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({}, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
+export default Home;

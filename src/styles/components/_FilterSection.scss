@@ -1,17 +1,18 @@
 .filter-section {
-  padding: 40px 0;
+  padding: 25px 0;
+  display: flex;
 
   .custom-select {
     display: inline;
     position: relative;
 
     &:after {
-      font: 25px FontAwesome;
+      font: 20px FontAwesome;
       color: #363636;
       right: 8px;
       height: 10px;
       margin-top: 5px;
-      padding: 0 5px 16px 10px;
+      padding: 4px 10px 12px 10px;
       border-left: 1px solid #363636;
       position: absolute;
       pointer-events: none;
@@ -26,7 +27,7 @@
     }
 
     input {
-      border: 1.8px solid $light-black;
+      border: 1.8px solid $dark-grey;
       border-radius: 3px;
       padding: 8px;
       width: 200px;
@@ -34,8 +35,12 @@
       -moz-appearance: none;
       -webkit-appearance: none;
       appearance: none;
-      cursor: pointer;
       font-weight: 600;
+      cursor: pointer;
+      &:disabled {
+        background: $light-grey;
+        cursor: default;
+      }
     }
 
     ul.options {
@@ -47,7 +52,7 @@
       width: auto;
       border: 1px solid $light-grey;
       font-size: 14px;
-      color: $light-black;
+      color: $dark-grey;
       border-radius: 3px;
       font-family: Arial, Helvetica, sans-serif;
       z-index: 20;
@@ -70,9 +75,62 @@
 
         &:hover,
         &.active {
+          transition: 0.5s;
           cursor: pointer;
           background: $light-grey;
         }
+      }
+    }
+  }
+
+  .period-field {
+    margin-left: 40px;
+    display: flex;
+
+    button {
+      border: 1.8px solid $dark-grey;
+      border-radius: 3px;
+      padding: 6px 12px;
+      outline: none;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+
+      &:disabled {
+        border-color: $medium-grey;
+        color: $medium-grey;
+        cursor: default;
+      }
+
+      i:before {
+        font: 20px FontAwesome;
+      }
+
+      &.prev i:before {
+        content: "\f104";
+      }
+
+      &.next i:before {
+        content: "\f105";
+      }
+    }
+
+    input {
+      text-align: center;
+      margin: 0 10px;
+      border: 1.8px solid $dark-grey;
+      border-radius: 3px;
+      padding: 8px;
+      width: 100px;
+      outline: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      font-weight: 600;
+      cursor: default;
+      &:disabled {
+        background: $light-grey;
+        cursor: default;
       }
     }
   }

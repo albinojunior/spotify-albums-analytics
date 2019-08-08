@@ -4,7 +4,7 @@
 
 body,
 html {
-  color: $light-black;
+  color: $dark-grey;
   margin: 0;
   font-family: "Circular", Helvetica, Arial, sans-serif;
   background: $light-grey;
@@ -14,4 +14,31 @@ html {
   padding: 50px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  h1 {
+    text-align: center;
+    color: $dark-grey;
+    font-size: 50px;
+  }
+
+  a {
+    background: $blue;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+    
+    &:hover {
+      color: white;
+      transition: 0.5s;
+      box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
 }

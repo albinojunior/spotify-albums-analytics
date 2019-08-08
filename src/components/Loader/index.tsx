@@ -1,5 +1,9 @@
 import React from 'react';
 
-const Loader: React.FC = () => <div className="Loader">loading...</div>;
+const Loader = () => (
+  <div className="loader">
+    <img src="assets/img/loader.svg" alt="loader" />
+  </div>
+);
 
 export default Loader;

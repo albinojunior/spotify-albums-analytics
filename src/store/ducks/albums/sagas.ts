@@ -1,6 +1,6 @@
-import {
- call, put, takeLatest, all,
-} from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import moment from 'moment';
+import _ from 'lodash';
 import { Album } from '../albums/types';
 import { AlbumsTypes as types } from './types';
 import api from '../../../services/api';
@@ -8,39 +8,27 @@ import api from '../../../services/api';
 import { loadSuccess, loadFailure } from './actions';
 
 export function buildAlbum({
-  id,
-  name,
-  release_date,
-  release_date_precision,
-  total_tracks,
+ id, name, release_date, total_tracks,
 }: Album): Album {
+  const release_year = moment(release_date).format('YYYY');
   return {
     id,
     name,
     release_date,
-    release_date_precision,
+    release_year,
     total_tracks,
   };
 }
 
 export function* load(action: any) {
   try {
-    const albums: any = {};
-    const calls: any = {};
-    for (const id of action.artists) {
-      const url = `/artists/${id}/albums?limit=50&offset=0&include_groups=album`;
-      calls[id] = call(api.get, url);
-    }
-    
-    const results = yield all(calls);
-    for (const id in results) {
-      const {
-        data: { items },
-      } = results[id];
-      albums[id] = items.map(buildAlbum);
-    }
-
-    yield put(loadSuccess(albums));
+    const { artistId } = action;
+    const url = `/artists/${artistId}/albums?limit=50&offset=0&include_groups=album&market=BR`;
+    const {
+      data: { items },
+    } = yield call(api.get, url);
+    const groupedAlbums = _.groupBy(items.map(buildAlbum), 'release_year');
+    yield put(loadSuccess(groupedAlbums));
   } catch (err) {
     console.log(err);
     yield put(loadFailure());

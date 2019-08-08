@@ -1,0 +1,16 @@
+.loader {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    position: absolute;
+    min-width: 100%;
+    left: 0;
+    background: rgba(112, 112, 112, 0.09);
+    top: 0;
+    z-index: 10;
+    img {
+      width: 100px;
+    }
+  }

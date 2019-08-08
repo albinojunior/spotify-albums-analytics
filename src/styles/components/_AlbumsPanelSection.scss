@@ -1,3 +1,8 @@
-// .albums-section {
-
-// }
+.albums-section {
+  display: flex;
+  justify-content: center;
+  .chart {
+    height: 500px;
+    width: 90%;
+  }
+}

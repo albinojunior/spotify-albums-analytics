@@ -2,13 +2,14 @@ import { Reducer } from 'redux';
 import { AlbumsState, AlbumsTypes as types } from './types';
 
 const INITIAL_STATE: AlbumsState = {
-  data: [],
+  data: null,
   error: false,
   loading: false,
+  selecteds: []
 };
 
-const reducer: Reducer<AlbumsState> = (state = INITIAL_STATE, action) => {
-  console.log(action);
+const reducer: Reducer<AlbumsState> = (state: AlbumsState = INITIAL_STATE, action: any) => {
+  if (process.env.NODE_ENV === 'development') console.log(action);
   switch (action.type) {
     case types.LOAD_REQUEST:
       return { ...state, loading: true };
@@ -25,6 +26,12 @@ const reducer: Reducer<AlbumsState> = (state = INITIAL_STATE, action) => {
         loading: false,
         error: true,
         data: [],
+      };
+    case types.SELECT:
+      return {
+        ...state,
+        selected: action.album,
+        year: action.year
       };
     default:
       return state;

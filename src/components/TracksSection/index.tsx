@@ -1,38 +1,78 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { ApplicationState } from '../../store';
 
 import ShadowCard from '../../components/ShadowCard';
 import TrackList from '../../components/TrackList';
-import { loadTopTracks } from '../../store/ducks/tracks/actions';
-import { artistIds } from '../../store/ducks/artists/sagas';
+import { loadTracks } from '../../store/ducks/tracks/actions';
 import { Track } from '../../store/ducks/tracks/types';
+import { Album } from '../../store/ducks/albums/types';
+import Loader from '../Loader';
 
 interface ReduxProps {
   tracks: Track[];
-  toptracks: Track[];
+  albums: Album[];
+  loading: boolean;
+}
+
+interface StateProps {
+  filter: string;
 }
 
 interface DispatchProps {
-  loadTopTracks(artists: string[]): void;
+  loadTracks(albumsIds: string[]): void;
 }
 
 type Props = ReduxProps & DispatchProps;
 
-class TracksSection extends Component<Props> {
-  componentDidMount() {
-    this.props.loadTopTracks(artistIds);
+class TracksSection extends Component<Props, StateProps> {
+  state = {
+    filter: '',
+  };
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { albums } = nextProps;
+    if (albums.length) {
+      const ids = albums.map(album => album.id);
+      this.props.loadTracks(ids);
+    }
   }
 
+  filterTracks(tracks: Track[], filter: string) {
+    return tracks.filter(track => track.name.toLowerCase().indexOf(filter.toLowerCase()) > -1);
+  }
+
+  changeFilter = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    this.setState({ filter: value });
+  };
+
   render() {
-    const { tracks, toptracks } = this.props;
+    const { tracks, loading } = this.props;
+    const { filter } = this.state;
+
+    if (loading) return <Loader />;
+    if (!tracks.length) return <></>;
+
+    const filteredTracks = this.filterTracks(tracks, filter);
     return (
       <ShadowCard
-        title="Todas as músicas do(s) artista(s)"
+        title="Todas as músicas do artista"
         content={() => (
           <div className="tracks-section">
-            <TrackList tracks={toptracks} showInfo={false}/>
+            <div className="filter-tracks">
+              <div className="filter">
+                <input
+                  id="filter"
+                  name="filter"
+                  value={filter}
+                  onChange={this.changeFilter}
+                  placeholder="Buscar música"
+                />
+              </div>
+            </div>
+            <TrackList tracks={filteredTracks} />
           </div>
         )}
       />
@@ -42,9 +82,10 @@ class TracksSection extends Component<Props> {
 
 const mapStateToProps = (state: ApplicationState) => ({
   tracks: state.tracks.data,
-  toptracks: state.tracks.toptracks
+  albums: state.albums.selecteds,
+  loading: state.tracks.loading,
 });
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({ loadTopTracks }, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({ loadTracks }, dispatch);
 
 export default connect(
   mapStateToProps,

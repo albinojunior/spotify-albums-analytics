@@ -1,0 +1,62 @@
+.track-card {
+  display: grid;
+  padding: 0.5%;
+  flex: 0 0 24%;
+  max-width: 24%;
+  position: relative;
+
+  .track-content {
+    padding: 13px;
+    border-radius: 10px;
+    color: $medium-grey;
+    border: 1px solid $grey;
+
+    .track-header {
+      padding: 10px 0;
+      display: flex;
+      border-bottom: 1px solid $grey;
+
+      span {
+        font-size: 14px;
+        width: 100%;
+        font-weight: 900;
+      }
+
+      .track-number {
+        text-align: right;
+      }
+    }
+
+    .track-body {
+      margin-top: 25px;
+      min-height: 60px;
+      .track-name {
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: 16px;
+      }
+      small {
+        font-style: italic;
+      }
+    }
+
+    .track-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        width: 25px;
+      }
+      .track-popularity {
+        font-size: 12px;
+        color: $blue;
+      }
+    }
+
+    &:hover {
+      transition: 0.5s;
+      cursor: pointer;
+      background: $light-grey;
+    }
+  }
+}

@@ -4,11 +4,11 @@ import { ArtistsState, ArtistsTypes as types } from './types';
 const INITIAL_STATE: ArtistsState = {
   data: [],
   error: false,
-  loading: false,
-  selected: null,
+  loading: false
 };
 
 const reducer: Reducer<ArtistsState> = (state = INITIAL_STATE, action) => {
+  if (process.env.NODE_ENV === 'development') console.log(action);
   switch (action.type) {
     case types.LOAD_REQUEST:
       return { ...state, loading: true };
@@ -29,7 +29,7 @@ const reducer: Reducer<ArtistsState> = (state = INITIAL_STATE, action) => {
     case types.SELECT:
       return {
         ...state,
-        selected: action.data,
+        selected: action.artistId,
       };
     default:
       return state;

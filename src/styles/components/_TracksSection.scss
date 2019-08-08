@@ -1,0 +1,38 @@
+.tracks-section {
+  display: block;
+  min-height: 580px;
+
+  .filter-tracks {
+    display: flow-root;
+    justify-items: right;
+    padding-right: 10%;
+
+    .filter {
+      &:before {
+        content: "\f002";
+        font: 20px FontAwesome;
+        position: absolute;
+        padding: 10px;
+        color: $medium-grey;
+      }
+
+      input#filter {
+        padding: 10px 10px 10px 40px;
+        border: none;
+        border-bottom: 1.5px solid $medium-grey;
+        width: 250px;
+        font-size: 16px;
+        font-weight: 500;
+
+        &:focus {
+          outline: none;
+        }
+      }
+      float: right;
+    }
+  }
+
+  .track-list {
+    margin: 40px 0;
+  }
+}

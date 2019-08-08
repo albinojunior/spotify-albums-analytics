@@ -6,4 +6,4 @@ export const loadSuccess = (data: Artist[]) => ({ type: types.LOAD_SUCCCESS, dat
 
 export const loadFailure = () => ({ type: types.LOAD_FAILURE });
 
-export const selectArtist = (data: Artist) => ({ type: types.SELECT, data });
+export const selectArtist = (artistId: string) => ({ type: types.SELECT, artistId });

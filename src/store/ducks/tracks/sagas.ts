@@ -1,55 +1,66 @@
-import {
- call, put, all, takeEvery, takeLatest,
-} from 'redux-saga/effects';
-import { TracksTypes as types, Track } from './types';
-import api from '../../../services/api';
+import { call, put, all, takeLatest } from "redux-saga/effects";
+import { Track } from "./types";
+import api from "../../../services/api";
 
-import {
- loadSuccess, loadFailure, loadTopTracksSuccess, loadTopTracksFailure,
-} from './actions';
-import { buildAlbum } from "../albums/sagas";
+import { loadSuccess, loadFailure, loadTracks } from "./actions";
+import { AlbumsTypes } from "../albums/types";
 
 function buildTrack({
+  id,
   name,
   disc_number,
   explicit,
   popularity,
   preview_url,
   track_number,
-  album,
+  album
 }: Track): Track {
   return {
+    id,
     name,
     disc_number,
     explicit,
     popularity,
     preview_url,
     track_number,
-    album: buildAlbum(album)
+    album
   };
 }
 
-export function* loadTopTracks(action: any) {
+export function* load(action: any) {
   try {
+    yield put(loadTracks());
     let tracksList: any = [];
+    const idCalls: any = [];
     const calls: any = [];
-    for (const id of action.artists) {
-      const url = `/artists/${id}/top-tracks?country=BR`;
+    for (const { id } of action.albums) {
+      const url = `/albums/${id}/tracks?limit=50`;
+      idCalls.push(call(api.get, url));
+    }
+
+    for (const result of yield all(idCalls)) {
+      const {
+        data: { items }
+      } = result;
+      const ids = items.map((track: any) => track.id);
+      const url = `/tracks?ids=${ids.join("%2C")}`;
       calls.push(call(api.get, url));
     }
+
     for (const result of yield all(calls)) {
       const {
-        data: { tracks },
+        data: { tracks }
       } = result;
       tracksList = [...tracksList, ...tracks.map(buildTrack)];
     }
-    yield put(loadTopTracksSuccess(tracksList));
+
+    yield put(loadSuccess(tracksList));
   } catch (err) {
     console.log(err);
-    yield put(loadTopTracksFailure());
+    yield put(loadFailure());
   }
 }
 
-const tracksSagas = [takeLatest(types.LOAD_TOP_TRACKS_REQUEST, loadTopTracks)];
+const tracksSagas = [takeLatest(AlbumsTypes.SELECT, load)];
 
 export default tracksSagas;

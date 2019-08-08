@@ -1,17 +1,18 @@
-import React from 'react';
-import { Track } from "../../store/ducks/tracks/types";
-import TrackCard from "../TrackCard";
+import React, { Fragment } from 'react';
+import { Track } from '../../store/ducks/tracks/types';
+import TrackCard from '../TrackCard';
 
 interface Props {
   tracks: Track[];
-  showInfo: boolean;
 }
 
-const TrackList = ({ tracks,  showInfo }: Props) => (
+const TrackList = ({ tracks }: Props) => (
   <div className="track-list">
-      {tracks.map(track => (
-          <TrackCard {...track}/>
-      ))}
+    {tracks.map(track => (
+      <Fragment key={track.name}>
+        <TrackCard {...track} />
+      </Fragment>
+    ))}
   </div>
 );
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Helmet } from "react-helmet"
 
 import FilterSection from "../../components/FilterSection";
 import AlbumsPanelSection from "../../components/AlbumsPanelSection";
@@ -9,9 +8,6 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <Helmet>
-          <title />
-        </Helmet>
         <FilterSection />
         <AlbumsPanelSection />
         <TracksSection />

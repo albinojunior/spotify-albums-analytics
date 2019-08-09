@@ -5,7 +5,10 @@ export enum AlbumsTypes {
   LOAD_REQUEST = "@albums/LOAD_REQUEST",
   LOAD_SUCCCESS = "@albums/LOAD_SUCCCESS",
   LOAD_FAILURE = "@albums/LOAD_FAILURE",
-  SELECT = "@albums/SELECT"
+  SELECT = "@albums/SELECT",
+  GET_REQUEST = "@albums/GET_REQUEST",
+  GET_SUCCCESS = "@albums/GET_SUCCCESS",
+  GET_FAILURE = "@albums/GET_FAILURE",
 }
 
 /**
@@ -29,4 +32,5 @@ export interface AlbumsState {
   readonly error: boolean;
   readonly selecteds: Album[];
   readonly year?: string;
+  readonly album?: Album;
 }

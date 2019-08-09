@@ -1,5 +1,5 @@
-import { buildToken, getBearerToken } from '../utils/auth';
-import { getStorageToken, isValidToken, setStorageToken } from '../utils/auth';
+import { buildToken, getBearerToken } from "../utils/auth";
+import { getStorageToken, isValidToken, setStorageToken } from "../utils/auth";
 
 const { REACT_APP_AUTH_URL, REACT_APP_AUTH_TOKEN } = process.env;
 
@@ -18,14 +18,14 @@ export async function getAuthorizationToken() {
 
 export async function requestAcessToken() {
   try {
-    const url = REACT_APP_AUTH_URL || '';
-    const body = 'grant_type=client_credentials';
+    const url = REACT_APP_AUTH_URL || "";
+    const body = "grant_type=client_credentials";
 
-    const res = await fetch(url, {
-      method: 'POST',
+    const res = await fetch("https://cors-anywhere.herokuapp.com/" + url, {
+      method: "POST",
       headers: {
         Authorization: `Basic ${REACT_APP_AUTH_TOKEN}`,
-        'content-type': 'application/x-www-form-urlencoded',
+        "content-type": "application/x-www-form-urlencoded"
       },
       body
     });

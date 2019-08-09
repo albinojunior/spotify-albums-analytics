@@ -1,15 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { getAuthorizationToken, requestAcessToken } from './auth';
+import { getAuthorizationToken, requestAcessToken } from "./auth";
 
 const { REACT_APP_API_URL } = process.env;
 
 export const api = axios.create({
   baseURL: REACT_APP_API_URL,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { "Content-Type": "application/json" }
 });
 
-api.interceptors.request.use(async (request) => {
+api.interceptors.request.use(async request => {
   try {
     const Authorization = await getAuthorizationToken();
     request.headers = { ...request.headers, Authorization };
@@ -22,7 +22,7 @@ api.interceptors.request.use(async (request) => {
 
 api.interceptors.response.use(
   response => response,
-  async (error) => {
+  async error => {
     const status = error.response ? error.response.status : null;
 
     if (status === 401) {
@@ -32,7 +32,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );
 
 export default api;

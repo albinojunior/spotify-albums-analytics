@@ -1,0 +1,105 @@
+.album {
+  padding: 5vh 0 0 5vh;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: none;
+
+  .info {
+    flex: 0 0 25%;
+    padding: 20px;
+    text-align: center;
+
+    h2 {
+      margin: 5px;
+    }
+
+    small {
+      font-size: 14px;
+    }
+
+    a {
+      outline: none;
+      cursor: pointer;
+      text-decoration: none;
+      color: $dark-grey;
+      &:hover {
+        transition: 0.5s;
+        text-decoration: underline;
+
+        img {
+          transition: filter 0.5s ease-in-out;
+          -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+          -webkit-box-shadow: 0 1px 15px $medium-grey;
+          -moz-box-shadow: 0 1px 15px $medium-grey;
+          box-shadow: 0 1px 15px $medium-grey;
+        }
+      }
+    }
+
+    .tracks-info {
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    img {
+      width: 100%;
+      -webkit-box-shadow: 0 1px 10px $medium-grey;
+      -moz-box-shadow: 0 1px 10px $medium-grey;
+      box-shadow: 0 1px 10px $medium-grey;
+    }
+  }
+
+  .tracks {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0 10px 10%;
+    max-height: 90vh;
+    overflow: auto;
+
+    .track {
+      padding: 10px;
+      width: 100%;
+      text-transform: capitalize;
+      border-bottom: 0.5px solid $light-grey;
+
+      &:hover {
+        border-bottom: 0.5px solid $medium-grey;
+        a:not(.artist) {
+          color: $medium-grey;
+          &:before {
+            content: "\f04b";
+          }
+        }
+        transition: 0.5s;
+        cursor: pointer;
+        background: $grey;
+      }
+
+      a:not(.artist) {
+        color: $dark-grey;
+        text-decoration: none;
+        &:before {
+          content: "\f001";
+          font: 15px FontAwesome;
+          margin: 0 15px 15px 0;
+        }
+      }
+
+      a.artist {
+        color: $dark-grey;
+        text-decoration: none;
+        margin-left: 30px;
+
+        &:hover {
+          transition: 0.5s;
+          text-decoration: underline;
+        }
+      }
+
+      .time {
+        float: right;
+      }
+    }
+  }
+}
